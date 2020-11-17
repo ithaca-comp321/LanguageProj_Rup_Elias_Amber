@@ -39,6 +39,24 @@ func chooseRandomWord(words) {
 
 func main() {
 
+    //if they get the letter right, prompt to guess whole word, if wrong then add a body part
+
+    fmt.Println("Enter a letter you will let to guess: ") 
+  
+    var guessLetter string 
+    fmt.Scanf("%s",&guessLetter)
+
+    if guessLetter == ...{
+        fmt.Println("Do you wan a letter you will let to guess: ")
+        var answer string 
+        fmt.Scanf("%s",&answer) 
+        if answer =="yes"{
+            
+        }
+        
+    }
+    
+
 	//create a list of all the words that the player will guess
 
 	//get the words inside of our defined list
@@ -57,6 +75,5 @@ func main() {
 
 //randomly select word user has to guess and replace letters with '_'
 
-//if they get the letter right, prompt to guess whole word, if wrong then add a body part
 
 //create an empty set to hold all guessed letters that user entered
