@@ -9,9 +9,18 @@ func insertLetter() {
 
 }
 
-func drawBodyPart() {
+func drawBodyPart(int count) {
 	//list of stuff head, left arm, right arm, left leg, right leg, body,
-
+    var bodyPart = []string {"head", "left arm", "right arm", "left leg", "right leg", "body"}
+    
+    string := RemoveIndex(helperstring []string, index int) []string {return append(s[:index], s[index+1:])}
+    
+    if count == 1{
+        bobdyPart = RemoveIndex(bodyPart,1)
+    }
+    else{
+        return bodyPart
+    }
 }
 
 func addGuessToSet() {
@@ -22,7 +31,7 @@ func addGuessToSet() {
 
 func chooseRandomWord(words) {
 	////DOESN'T WORK
-	randomWord = rand.string(len(words))
+	var randomWord = rand.string(len(words))
 
 	pick := words[randomWord]
 	return
