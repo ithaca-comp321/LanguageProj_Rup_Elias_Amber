@@ -12,15 +12,12 @@ func insertLetter() {
 func drawBodyPart(int count) {
 	//list of stuff head, left arm, right arm, left leg, right leg, body,
     var bodyPart = []string {"head", "left arm", "right arm", "left leg", "right leg", "body"}
-    
-    string := RemoveIndex(helperstring []string, index int) []string {return append(s[:index], s[index+1:])}
-    
-    if count == 1{
-        bobdyPart = RemoveIndex(bodyPart,1)
+    	
+	for i = 0; bodyPart <= 0; i++ {
+		bodyPart = bodyPart[i-1];
+		return bodyPart;
     }
-    else{
-        return bodyPart
-    }
+    
 }
 
 func addGuessToSet() {
@@ -47,7 +44,7 @@ func main() {
     fmt.Scanf("%s",&guessLetter)
 
     if guessLetter == ...{
-        fmt.Println("Do you wan a letter you will let to guess: ")
+        fmt.Println("Do you wan a letter you will let to guess: ");
         var answer string 
         fmt.Scanf("%s",&answer) 
         if answer =="yes"{
