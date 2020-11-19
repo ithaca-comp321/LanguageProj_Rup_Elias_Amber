@@ -16,7 +16,7 @@ var guesses []string //create an empty set to hold all guessed letters that user
 var word string
 
 func drawBodyPart(wrongGuessCount int) []string {
-	for i := wrongGuessCount; i <= len(bodyPart); i++ {
+	for i := wrongGuessCount - 1; i <= wrongGuessCount; i++ {
 		currentBody = append(currentBody, bodyPart[i])
 	}
 	return currentBody
@@ -78,9 +78,7 @@ func getWordProgress() (answer string, dashes string, fullWord string) { //TODO
 	}
 
 func checkWholeWordGuess(guess string) bool {
-	//checks if the user's guess for the whole word is exactly matching or not. make sure what is given is made lowercase
-
-	return false
+	return strings.ToLower(guess) == strings.ToLower(word)
 }
 
 func checkLose() bool {
@@ -99,7 +97,7 @@ func main() {
 	getWordProgress(word)
 
 	for answer != "quit" {
-
+		fmt.Printf("Guesses so far: %v \n", guesses)
 		fmt.Println("Enter 'letter' to guess a single letter or 'word' to guess the whole word: ")
 		fmt.Scanf("%s", &answer)
 
