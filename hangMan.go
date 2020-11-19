@@ -64,7 +64,7 @@ func main() {
 	getWordProgress()
 
 	for answer != "quit" {
-		//TODO Ask if they want to guess a letter or the whole word, then prompt for it
+		//TODO Ask if they want to guess a letter or the whole word
 		fmt.Scanf("%s", &answer)
 
 		if answer == "letter" {
@@ -74,13 +74,17 @@ func main() {
 			addGuessToSet(answer)
 			wordProgress, guessedRight := getWordProgress()
 
-			if !guessedRight {
+			if !guessedRight { //if they didn't guess right
 				wrongGuessCount++
 				currentBody = drawBodyPart(wrongGuessCount)
 			}
 
 			fmt.Println("Word Progress: " + wordProgress)
 			fmt.Printf("Bodyparts visible: %v", currentBody) //this prints the whole list?
+		} else if answer == "word" {
+			//TODO, also if their guessed word length doesn't match the given word length, make em guess again
+		} else {
+			//TODO user is dumb
 		}
 	}
 }
