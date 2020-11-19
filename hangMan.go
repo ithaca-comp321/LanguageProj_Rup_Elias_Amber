@@ -25,7 +25,7 @@ func drawBodyPart(wrongGuessCount int) []string {
 func addGuessToSet(guess string) string {
 	//when letters is guessed then automatically add to set
 	//if it already exists then return "enter another letter"
-	var duplicate bool = false
+	var duplicate = false
 	for _, i := range guesses {
 		if i == guess {
 			duplicate = true
@@ -74,28 +74,33 @@ func main() {
 	var wrongGuessCount int
 	var answer string
 
+	fmt.Println("Welcome to Go Hangman.")
 	word = chooseRandomWord() //randomly select word user has to guess
 	fmt.Println("Your word is : " + formatWord(word))
 	getWordProgress()
 
 	for answer != "quit" {
-		//TODO Ask if they want to guess a letter or the whole word
+
+		fmt.Println("Enter 'letter' to guess a single letter or 'word' to guess the whole word: ")
 		fmt.Scanf("%s", &answer)
 
 		if answer == "letter" {
 			fmt.Println("\nGuess a letter or enter 'quit' to stop: ")
 			fmt.Scanf("%s", &answer) //TODO need to do some user error checking here, make sure they only enter a letter
+			if len(answer) == 1 {
+				addGuessToSet(answer)
+				wordProgress, guessedRight := getWordProgress() //get the results
 
-			addGuessToSet(answer)
-			wordProgress, guessedRight := getWordProgress()
+				if !guessedRight { //if they didn't guess right
+					wrongGuessCount++
+					currentBody = drawBodyPart(wrongGuessCount)
+				}
 
-			if !guessedRight { //if they didn't guess right
-				wrongGuessCount++
-				currentBody = drawBodyPart(wrongGuessCount)
+				fmt.Println("Word Progress: " + wordProgress)
+				fmt.Printf("Bodyparts visible: %v", currentBody) //this prints the whole list?
+			} else {
+				fmt.Println("Please only enter a single letter")
 			}
-
-			fmt.Println("Word Progress: " + wordProgress)
-			fmt.Printf("Bodyparts visible: %v", currentBody) //this prints the whole list?
 		} else if answer == "word" {
 			//TODO, also if their guessed word length doesn't match the given word length, make em guess again
 		} else {
