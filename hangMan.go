@@ -3,11 +3,13 @@ package main
 import (
 	"fmt"
 	"math/rand"
+
 	//"regexp"
+	"time"
 )
 
 var bodyPart = []string{"head", "left arm", "right arm", "left leg", "right leg", "body"}
-var words = []string{"bananas", "apples", "peach", "elephant", "orange", "burritos", "ithaca college"}
+var words = []string{"bananas", "apples", "peach", "elephant", "orange", "burritos", "ithaca", "college"}
 
 var currentBody []string
 var guesses []string //create an empty set to hold all guessed letters that user entered
@@ -38,10 +40,23 @@ func addGuessToSet(guess string) string {
 }
 
 func chooseRandomWord() string {
-	var randomWord = rand.Intn(len(words))
+	rand.Seed(time.Now().Unix())
 
-	var pick string = words[randomWord]
+	//var randomIndx = rand.Intn(len(words))
+
+	var pick = words[rand.Intn(len(words))]
+
 	return pick
+}
+
+func formatWord(word string) string {
+	var newString = ""
+
+	for i := 0; i < len(word); i++ {
+		newString += "_ "
+
+	}
+	return newString
 }
 
 func getWordProgress() (string, bool) { //TODO
@@ -60,7 +75,7 @@ func main() {
 	var answer string
 
 	word = chooseRandomWord() //randomly select word user has to guess
-	fmt.Println("Your word is :  ")
+	fmt.Println("Your word is : " + formatWord(word))
 	getWordProgress()
 
 	for answer != "quit" {
