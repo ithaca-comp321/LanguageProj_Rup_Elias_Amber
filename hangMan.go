@@ -50,24 +50,33 @@ func chooseRandomWord() string {
 }
 
 func formatWord(word string) string {
-	var newString = ""
+	var dashes = ""
 
 	for i := 0; i < len(word); i++ {
-		newString += "_ "
+		dashes += "_"
 
 	}
-	return newString
+	return dashes
 }
 
-func getWordProgress() (string, bool) { //TODO
-	//init wordProgress with a string of underscores of length that matches the word
-	//look through guesses - if a guessed letter is in word, then look for where it exists in the word and
-	//replace the respective underscores in wordProgress. Might want to make this a set?
-	//return wordProgress and if the guessed letter was in the word or not
-	//regexp package may be useful?
+func getWordProgress() (answer string, dashes string, fullWord string) { //TODO
+	//check if user letter is correct 
+	//replace "_" with the letter user guess right
 
-	return "", false
-}
+	var newdashes = "";
+
+	//loop through dashs to place the letter user guess 
+	for i, r := range dashes {
+			var letter = string(word[i])
+			if answer == letter {
+				newdashes += answer
+			} else {
+				newdashes += "_"
+			}
+		}
+		return answer, fullWord, newdashes
+	}
+
 
 func main() {
 
@@ -75,8 +84,9 @@ func main() {
 	var answer string
 
 	word = chooseRandomWord() //randomly select word user has to guess
+	dashes = formatWord(word)
 	fmt.Println("Your word is : " + formatWord(word))
-	getWordProgress()
+	getWordProgress(word)
 
 	for answer != "quit" {
 		//TODO Ask if they want to guess a letter or the whole word
