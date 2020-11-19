@@ -77,7 +77,6 @@ func getWordProgress() (answer string, dashes string, fullWord string) { //TODO
 		return answer, fullWord, newdashes
 	}
 
-
 func checkWholeWordGuess(guess string) bool {
 	//checks if the user's guess for the whole word is exactly matching or not. make sure what is given is made lowercase
 
