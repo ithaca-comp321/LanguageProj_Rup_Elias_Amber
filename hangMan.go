@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 	"math/rand"
-
+	"strings"
 	//"regexp"
 	"time"
 )
@@ -16,7 +16,7 @@ var guesses []string //create an empty set to hold all guessed letters that user
 var word string
 
 func drawBodyPart(wrongGuessCount int) []string {
-	for i := 0; i <= wrongGuessCount; i++ {
+	for i := wrongGuessCount; i <= len(bodyPart); i++ {
 		currentBody = append(currentBody, bodyPart[i])
 	}
 	return currentBody
@@ -69,6 +69,16 @@ func getWordProgress() (string, bool) { //TODO
 	return "", false
 }
 
+func checkWholeWordGuess(guess string) bool {
+	//checks if the user's guess for the whole word is exactly matching or not. make sure what is given is made lowercase
+
+	return false
+}
+
+func checkLose() bool {
+	return len(currentBody) == len(bodyPart)
+}
+
 func main() {
 
 	var wrongGuessCount int
@@ -86,25 +96,57 @@ func main() {
 
 		if answer == "letter" {
 			fmt.Println("\nGuess a letter or enter 'quit' to stop: ")
-			fmt.Scanf("%s", &answer) //TODO need to do some user error checking here, make sure they only enter a letter
-			if len(answer) == 1 {
-				addGuessToSet(answer)
+			fmt.Scanf("%s", &answer)
+
+			if len(answer) == 1 { //TODO check answer is a character?
+				addGuessToSet(strings.ToLower(answer))
 				wordProgress, guessedRight := getWordProgress() //get the results
 
 				if !guessedRight { //if they didn't guess right
 					wrongGuessCount++
+					fmt.Println("That letter is not in the word.")
 					currentBody = drawBodyPart(wrongGuessCount)
+					if checkLose() {
+						fmt.Println("You lost!")
+						break
+					}
 				}
 
 				fmt.Println("Word Progress: " + wordProgress)
-				fmt.Printf("Bodyparts visible: %v", currentBody) //this prints the whole list?
+				fmt.Printf("Bodyparts visible: %v \n", currentBody) //this prints the whole list?
+
 			} else {
 				fmt.Println("Please only enter a single letter")
 			}
+
 		} else if answer == "word" {
-			//TODO, also if their guessed word length doesn't match the given word length, make em guess again
+			fmt.Println("\nGuess the word or enter 'quit' to stop: ")
+			fmt.Scanf("%s", &answer) //need to worry about it not having only characters?
+			//TODO
+			if len(answer) == len(word) {
+				isCorrect := checkWholeWordGuess(strings.ToLower(answer))
+
+				if isCorrect {
+					fmt.Println("Congratulations! You got it right.")
+					break
+				} else {
+					fmt.Println("Your guess was incorrect.")
+					currentBody = drawBodyPart(wrongGuessCount)
+					fmt.Printf("Bodyparts visible: %v \n", currentBody)
+					if checkLose() {
+						fmt.Println("You lost!")
+						break
+					}
+				}
+
+			} else {
+				fmt.Println("The length of your guess doesn't match the length of the actual word, please try again.")
+			}
+
 		} else {
-			//TODO user is dumb
+			fmt.Println("Please only enter 'letter' or 'word' exactly (or 'quit' to stop).")
 		}
 	}
+
+	fmt.Println("Restart the program to play again")
 }
