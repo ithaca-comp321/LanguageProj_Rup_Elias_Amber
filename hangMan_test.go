@@ -51,3 +51,14 @@ func TestGetWordProgress(t *testing.T) {
 	assertEqual(t, guessedWord2, "b a _ _ _ _ ")
 
 }
+
+func TestAddGuessToSet(t *testing.T) {
+	
+	//ture or false 
+
+	var letter = "a"
+	var placeLetter = addGuessToSet(letter)
+
+	assertEqual(t, placeLetter, true)
+
+}
