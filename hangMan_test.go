@@ -32,7 +32,7 @@ func TestFormatWord(t *testing.T) {
 
 	assertEqual(t, len(newWord2), len(j)*2)
 
-	assertEqual(t, newWord, "_ _ _ _ ")
+	assertEqual(t, newWord, "____")
 
 }
 
@@ -42,19 +42,19 @@ func TestGetWordProgress(t *testing.T) {
 
 	var guessedWord, _ = getWordProgress("b", hide, word)
 
-	assertEqual(t, guessedWord, " b _  _  _  _  _  ")
+	assertEqual(t, guessedWord, " b_____")
 
 	var guessedWord1, _ = getWordProgress("a", guessedWord, word)
-	assertEqual(t, guessedWord1, "b a _ _ _ _ ")
+	assertEqual(t, guessedWord1, "ba____")
 
 	var guessedWord2, _ = getWordProgress("k", guessedWord1, word)
-	assertEqual(t, guessedWord2, "b a _ _ _ _ ")
+	assertEqual(t, guessedWord2, "ba____")
 
 }
 
 func TestAddGuessToSet(t *testing.T) {
-	
-	//ture or false 
+
+	//ture or false
 
 	var letter = "a"
 	var placeLetter = addGuessToSet(letter)
