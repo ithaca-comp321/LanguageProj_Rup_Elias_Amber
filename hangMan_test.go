@@ -63,3 +63,17 @@ func TestAddGuessToSet(t *testing.T) {
 	placeLetter = addGuessToSet(letter)
 	assertEqual(t, placeLetter, false)
 }
+
+func TestCheckWholeWordGuess(t *testing.T) {
+
+	//true or false
+
+	var fullWord = "banana"
+	var checkWin = checkWholeWordGuess(fullWord)
+	assertEqual(t, checkWin, true)
+
+	var fullWord2 = "cat"
+	var checkWin2 = checkWholeWordGuess(fullWord2)
+	assertEqual(t, checkWin2, false)
+	
+}
