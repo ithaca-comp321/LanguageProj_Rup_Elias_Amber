@@ -92,8 +92,12 @@ func getWordProgress(answer string, currentWord string, fullWord string) (string
 	return new_word, guessedRight
 }
 
-func checkWholeWordGuess(guess string) bool {
-	return strings.ToLower(guess) == strings.ToLower(wordToGuess)
+func checkWholeWordGuess(guess string, wordToGuess string) bool {
+	if strings.ToLower(guess) != strings.ToLower(wordToGuess){
+		return false
+	}
+	return true
+	
 }
 
 func checkLose() bool {
