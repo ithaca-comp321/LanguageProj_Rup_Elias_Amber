@@ -93,11 +93,11 @@ func getWordProgress(answer string, currentWord string, fullWord string) (string
 }
 
 func checkWholeWordGuess(guess string, wordToGuess string) bool {
-	if strings.ToLower(guess) != strings.ToLower(wordToGuess){
+	if strings.ToLower(guess) != strings.ToLower(wordToGuess) {
 		return false
 	}
 	return true
-	
+
 }
 
 func checkLose() bool {
@@ -157,7 +157,7 @@ func main() { //user interface
 			fmt.Scanf("%s", &answer) //need to worry about it not having only characters?
 			//TODO
 			if len(answer) == len(wordToGuess) {
-				isCorrect := checkWholeWordGuess(strings.ToLower(answer))
+				isCorrect := checkWholeWordGuess(strings.ToLower(answer), wordToGuess)
 
 				if isCorrect {
 					fmt.Println("Congratulations! You got it right.")
