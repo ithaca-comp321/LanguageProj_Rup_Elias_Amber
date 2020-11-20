@@ -18,7 +18,7 @@ var guesses []string //create an empty set to hold all guessed letters that user
 var wordToGuess string
 
 //func drawBodyPart(wrongGuessCount int) []string {
-//	//TODO broken
+//	//TODO broken, replaced with a counter for now
 //	//for i := wrongGuessCount - 1; i <= wrongGuessCount; i++ {
 //	//	currentBody = append(currentBody, bodyPart[i])
 //	//}
@@ -30,9 +30,9 @@ var wordToGuess string
 //	return currentBody
 //}
 
-func addGuessToSet(guess string) string {
+func addGuessToSet(guess string) bool {
 	//when letters is guessed then automatically add to set
-	//if it already exists then return "enter another letter"
+	//if it already exists then return false, which means it was already guessed
 	var duplicate = false
 	for _, i := range guesses {
 		if i == guess {
@@ -40,10 +40,10 @@ func addGuessToSet(guess string) string {
 		}
 	}
 	if duplicate {
-		return "You guessed a duplicate letter, guess another.\n"
+		return false
 	} else {
 		guesses = append(guesses, guess)
-		return "You guessed " + guess + "\n"
+		return true
 	}
 }
 
@@ -120,8 +120,7 @@ func main() { //user interface
 			fmt.Println("\nGuess a letter or enter 'quit' to stop: ")
 			fmt.Scanf("%s", &answer)
 
-			if len(answer) == 1 { //TODO check answer is a character?
-				addGuessToSet(strings.ToLower(answer))
+			if len(answer) == 1 && addGuessToSet(strings.ToLower(answer)) { //TODO check answer is a character?
 				wordProgress, guessedRight := getWordProgress(answer, currentWordProgress, wordToGuess) //get the results
 
 				if !guessedRight { //if they didn't guess right
@@ -140,7 +139,7 @@ func main() { //user interface
 				fmt.Println("Bodyparts visible: ", bodyParts)
 
 			} else {
-				fmt.Println("Please only enter a single letter")
+				fmt.Println("Please only enter a single letter, or make sure you didn't enter a duplicate guess.")
 			}
 
 		} else if answer == "word" {

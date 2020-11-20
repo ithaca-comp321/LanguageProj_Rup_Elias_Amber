@@ -12,6 +12,7 @@ install Go from here: https://golang.org/doc/install.
 For GoLand, read through https://www.jetbrains.com/help/go/quick-start-guide-goland.html and clone
 the repository. If it's not working, you may need to configure the GOROOT and GOPATH - https://www.jetbrains.com/help/go/configuring-goroot-and-gopath.html
 
+To run the tests, you may need to edit the run configuration (possibly for each test function annoyingly) by adding the hangMan.go file to the list of files.
 
 For VSCode, install the Go extension and clone the repository.
 
