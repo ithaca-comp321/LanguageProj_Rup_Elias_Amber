@@ -22,3 +22,6 @@ site may be useful: https://www.tutorialspoint.com/go.
 #### Notes:
 Our initial investigation of Go: 
 https://docs.google.com/document/d/1fop2oMv6MdyyNyQqXiKQ_ZE6mseTU5dZPOyg3uXcqp4
+
+Some notes on the language:
+https://docs.google.com/document/d/18zQYEUHc53vDFi3_vHFwRFJJAGJu36cqavk8sk3632Y/edit?usp=sharing
