@@ -104,11 +104,13 @@ func main() { //user interface
 	var wrongGuessCount int
 	var answer string
 	var currentWordProgress string
+	var guessedRight bool
 
 	fmt.Println("Welcome to Go Hangman.")
 	var wordToGuess = chooseRandomWord() //randomly select word user has to guess
 	currentWordProgress = formatWord(wordToGuess)
 	fmt.Println("Your word is : " + currentWordProgress)
+	fmt.Println("DEBUG: " + wordToGuess)
 	currentWordProgress, _ = getWordProgress("0", currentWordProgress, wordToGuess) //the _ is a blank identifier, which ignores the second return value
 
 	for answer != "quit" {
@@ -121,7 +123,7 @@ func main() { //user interface
 			fmt.Scanf("%s", &answer)
 
 			if len(answer) == 1 && addGuessToSet(strings.ToLower(answer)) { //TODO check answer is a character?
-				wordProgress, guessedRight := getWordProgress(answer, currentWordProgress, wordToGuess) //get the results
+				currentWordProgress, guessedRight = getWordProgress(answer, currentWordProgress, wordToGuess) //get the results
 
 				if !guessedRight { //if they didn't guess right
 					wrongGuessCount++
@@ -134,7 +136,11 @@ func main() { //user interface
 					}
 				}
 
-				fmt.Println("Word Progress: " + wordProgress)
+				fmt.Println("Word Progress: " + currentWordProgress)
+				if currentWordProgress == wordToGuess {
+					fmt.Println("You win!")
+					break
+				}
 				//fmt.Printf("Bodyparts visible: %v \n", currentBody)
 				fmt.Println("Bodyparts visible: ", bodyParts)
 

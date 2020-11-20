@@ -54,7 +54,7 @@ func TestGetWordProgress(t *testing.T) {
 
 func TestAddGuessToSet(t *testing.T) {
 
-	//ture or false
+	//true or false
 
 	var letter = "a"
 	var placeLetter = addGuessToSet(letter)
