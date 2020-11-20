@@ -10,25 +10,25 @@ import (
 )
 
 //lazy global variables
-var bodyPart = [6]string{"head", "left arm", "right arm", "left leg", "right leg", "body"}
+var bodyParts = 0
 var words = []string{"bananas", "apples", "peach", "elephant", "orange", "burritos", "ithaca", "college"}
 
-var currentBody []string
+//var currentBody []string
 var guesses []string //create an empty set to hold all guessed letters that user entered
 var wordToGuess string
 
-func drawBodyPart(wrongGuessCount int) []string {
-	//TODO broken
-	//for i := wrongGuessCount - 1; i <= wrongGuessCount; i++ {
-	//	currentBody = append(currentBody, bodyPart[i])
-	//}
-	//return currentBody
-
-	for i := 0; i <= wrongGuessCount; i++ {
-		currentBody[i] = bodyPart[i]
-	}
-	return currentBody
-}
+//func drawBodyPart(wrongGuessCount int) []string {
+//	//TODO broken
+//	//for i := wrongGuessCount - 1; i <= wrongGuessCount; i++ {
+//	//	currentBody = append(currentBody, bodyPart[i])
+//	//}
+//	//return currentBody
+//
+//	for i := 0; i <= wrongGuessCount; i++ {
+//		currentBody[i] = bodyPart[i]
+//	}
+//	return currentBody
+//}
 
 func addGuessToSet(guess string) string {
 	//when letters is guessed then automatically add to set
@@ -68,7 +68,7 @@ func formatWord(word string) string {
 }
 
 //current word starts off as the dashes
-func getWordProgress(answer string, currentWord string, fullWord string) (string, bool) {
+func getWordProgress(answer string, currentWord string, fullWord string) (string, bool) { //progress is not saved correctly
 	//check if user letter is correct
 	//replace "_" with the letter user guess right
 
@@ -82,7 +82,11 @@ func getWordProgress(answer string, currentWord string, fullWord string) (string
 			new_word += answer
 			guessedRight = true
 		} else {
-			new_word += "_"
+			if string(currentWord[i]) != "_" {
+				new_word += string(currentWord[i])
+			} else {
+				new_word += "_"
+			}
 		}
 	}
 	return new_word, guessedRight
@@ -93,7 +97,7 @@ func checkWholeWordGuess(guess string) bool {
 }
 
 func checkLose() bool {
-	return len(currentBody) == len(bodyPart)
+	return bodyParts == 7
 }
 
 func main() { //user interface
@@ -123,7 +127,8 @@ func main() { //user interface
 				if !guessedRight { //if they didn't guess right
 					wrongGuessCount++
 					fmt.Println("That letter is not in the word.")
-					currentBody = drawBodyPart(wrongGuessCount)
+					//currentBody = drawBodyPart(wrongGuessCount)
+					bodyParts++
 					if checkLose() {
 						fmt.Println("You lost!")
 						break
@@ -131,7 +136,8 @@ func main() { //user interface
 				}
 
 				fmt.Println("Word Progress: " + wordProgress)
-				fmt.Printf("Bodyparts visible: %v \n", currentBody) //this prints the whole list?
+				//fmt.Printf("Bodyparts visible: %v \n", currentBody)
+				fmt.Println("Bodyparts visible: ", bodyParts)
 
 			} else {
 				fmt.Println("Please only enter a single letter")
@@ -149,8 +155,10 @@ func main() { //user interface
 					break
 				} else {
 					fmt.Println("Your guess was incorrect.")
-					currentBody = drawBodyPart(wrongGuessCount)
-					fmt.Printf("Bodyparts visible: %v \n", currentBody)
+					//currentBody = drawBodyPart(wrongGuessCount)
+					bodyParts++
+					//fmt.Printf("Bodyparts visible: %v \n", currentBody)
+					fmt.Println("Bodyparts visible: ", bodyParts)
 					if checkLose() {
 						fmt.Println("You lost!")
 						break
