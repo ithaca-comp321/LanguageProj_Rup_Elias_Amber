@@ -69,11 +69,11 @@ func TestCheckWholeWordGuess(t *testing.T) {
 	//true or false
 
 	var fullWord = "banana"
-	var checkWin = checkWholeWordGuess(fullWord)
+	var checkWin = checkWholeWordGuess(fullWord, "banana")
 	assertEqual(t, checkWin, true)
 
 	var fullWord2 = "cat"
-	var checkWin2 = checkWholeWordGuess(fullWord2)
+	var checkWin2 = checkWholeWordGuess(fullWord2, "banana")
 	assertEqual(t, checkWin2, false)
-	
+
 }
