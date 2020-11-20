@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"math/rand"
 	"strings"
 
@@ -8,16 +9,23 @@ import (
 	"time"
 )
 
-var bodyPart = []string{"head", "left arm", "right arm", "left leg", "right leg", "body"}
+//lazy global variables
+var bodyPart = [6]string{"head", "left arm", "right arm", "left leg", "right leg", "body"}
 var words = []string{"bananas", "apples", "peach", "elephant", "orange", "burritos", "ithaca", "college"}
 
 var currentBody []string
 var guesses []string //create an empty set to hold all guessed letters that user entered
-var word string
+var wordToGuess string
 
 func drawBodyPart(wrongGuessCount int) []string {
-	for i := wrongGuessCount - 1; i <= wrongGuessCount; i++ {
-		currentBody = append(currentBody, bodyPart[i])
+	//TODO broken
+	//for i := wrongGuessCount - 1; i <= wrongGuessCount; i++ {
+	//	currentBody = append(currentBody, bodyPart[i])
+	//}
+	//return currentBody
+
+	for i := 0; i <= wrongGuessCount; i++ {
+		currentBody[i] = bodyPart[i]
 	}
 	return currentBody
 }
@@ -59,44 +67,45 @@ func formatWord(word string) string {
 	return dashes
 }
 
-func getWordProgress(answer string, currentWord string, fullWord string) string { //TODO
+//current word starts off as the dashes
+func getWordProgress(answer string, currentWord string, fullWord string) (string, bool) {
 	//check if user letter is correct
 	//replace "_" with the letter user guess right
 
 	var new_word = ""
+	var guessedRight = false
 
-	//loop through dashs to place the letter user guess
-	for i, _ := range currentWord {
+	//loop through dashes to place the letter user guessed
+	for i := 0; i < len(currentWord); i++ {
 		var letter = string(fullWord[i])
 		if answer == letter {
 			new_word += answer
+			guessedRight = true
 		} else {
-			new_word += " _ "
+			new_word += "_"
 		}
 	}
-	return new_word
+	return new_word, guessedRight
 }
 
 func checkWholeWordGuess(guess string) bool {
-	return strings.ToLower(guess) == strings.ToLower(word)
+	return strings.ToLower(guess) == strings.ToLower(wordToGuess)
 }
 
 func checkLose() bool {
 	return len(currentBody) == len(bodyPart)
 }
 
-func main() {}
-
-/*
+func main() { //user interface
 	var wrongGuessCount int
 	var answer string
-	var dashes string
+	var currentWordProgress string
 
 	fmt.Println("Welcome to Go Hangman.")
-	word = chooseRandomWord() //randomly select word user has to guess
-	dashes = formatWord(word)
-	fmt.Println("Your word is : " + formatWord(word))
-	getWordProgress(word)
+	var wordToGuess = chooseRandomWord() //randomly select word user has to guess
+	currentWordProgress = formatWord(wordToGuess)
+	fmt.Println("Your word is : " + currentWordProgress)
+	currentWordProgress, _ = getWordProgress("0", currentWordProgress, wordToGuess) //the _ is a blank identifier, which ignores the second return value
 
 	for answer != "quit" {
 		fmt.Printf("Guesses so far: %v \n", guesses)
@@ -109,7 +118,7 @@ func main() {}
 
 			if len(answer) == 1 { //TODO check answer is a character?
 				addGuessToSet(strings.ToLower(answer))
-				wordProgress, guessedRight := getWordProgress() //get the results
+				wordProgress, guessedRight := getWordProgress(answer, currentWordProgress, wordToGuess) //get the results
 
 				if !guessedRight { //if they didn't guess right
 					wrongGuessCount++
@@ -132,7 +141,7 @@ func main() {}
 			fmt.Println("\nGuess the word or enter 'quit' to stop: ")
 			fmt.Scanf("%s", &answer) //need to worry about it not having only characters?
 			//TODO
-			if len(answer) == len(word) {
+			if len(answer) == len(wordToGuess) {
 				isCorrect := checkWholeWordGuess(strings.ToLower(answer))
 
 				if isCorrect {
@@ -159,4 +168,3 @@ func main() {}
 
 	fmt.Println("Restart the program to play again")
 }
-*/

@@ -40,14 +40,14 @@ func TestGetWordProgress(t *testing.T) {
 	var word = "banana"
 	var hide = formatWord(word)
 
-	var guessedWord = getWordProgress("b", hide, word)
+	var guessedWord, _ = getWordProgress("b", hide, word)
 
 	assertEqual(t, guessedWord, " b _  _  _  _  _  ")
 
-	var guessedWord1 = getWordProgress("a", guessedWord, word)
+	var guessedWord1, _ = getWordProgress("a", guessedWord, word)
 	assertEqual(t, guessedWord1, "b a _ _ _ _ ")
 
-	var guessedWord2 = getWordProgress("k", guessedWord1, word)
+	var guessedWord2, _ = getWordProgress("k", guessedWord1, word)
 	assertEqual(t, guessedWord2, "b a _ _ _ _ ")
 
 }
