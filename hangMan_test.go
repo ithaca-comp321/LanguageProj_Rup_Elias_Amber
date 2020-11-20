@@ -35,3 +35,19 @@ func TestFormatWord(t *testing.T) {
 	assertEqual(t, newWord, "_ _ _ _ ")
 
 }
+
+func TestGetWordProgress(t *testing.T) {
+	var word = "banana"
+	var hide = formatWord(word)
+
+	var guessedWord = getWordProgress("b", hide, word)
+
+	assertEqual(t, guessedWord, "b  _  _  _  _  _ ")
+
+	var guessedWord1 = getWordProgress("a", guessedWord, word)
+	assertEqual(t, guessedWord1, "b a _ _ _ _ ")
+
+	var guessedWord2 = getWordProgress("k", guessedWord1, word)
+	assertEqual(t, guessedWord2, "b a _ _ _ _ ")
+
+}

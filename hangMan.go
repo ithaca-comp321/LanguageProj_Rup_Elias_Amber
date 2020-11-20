@@ -1,9 +1,9 @@
 package main
 
 import (
-	"fmt"
 	"math/rand"
 	"strings"
+
 	//"regexp"
 	"time"
 )
@@ -59,23 +59,23 @@ func formatWord(word string) string {
 	return dashes
 }
 
-func getWordProgress() (answer string, dashes string, fullWord string) { //TODO
-	//check if user letter is correct 
+func getWordProgress(answer string, currentWord string, fullWord string) string { //TODO
+	//check if user letter is correct
 	//replace "_" with the letter user guess right
 
-	var newdashes = "";
+	var new_word = ""
 
-	//loop through dashs to place the letter user guess 
-	for i, r := range dashes {
-			var letter = string(word[i])
-			if answer == letter {
-				newdashes += answer
-			} else {
-				newdashes += "_"
-			}
+	//loop through dashs to place the letter user guess
+	for i, _ := range currentWord {
+		var letter = string(fullWord[i])
+		if answer == letter {
+			new_word += answer
+		} else {
+			new_word += " _ "
 		}
-		return answer, fullWord, newdashes
 	}
+	return new_word
+}
 
 func checkWholeWordGuess(guess string) bool {
 	return strings.ToLower(guess) == strings.ToLower(word)
@@ -85,10 +85,12 @@ func checkLose() bool {
 	return len(currentBody) == len(bodyPart)
 }
 
-func main() {
+func main() {}
 
+/*
 	var wrongGuessCount int
 	var answer string
+	var dashes string
 
 	fmt.Println("Welcome to Go Hangman.")
 	word = chooseRandomWord() //randomly select word user has to guess
@@ -157,3 +159,4 @@ func main() {
 
 	fmt.Println("Restart the program to play again")
 }
+*/
